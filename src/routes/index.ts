@@ -6,4 +6,4 @@ router.get('/',(req,res,next) => {
   res.send({ok: true, message: 'Welcome to MMIS Contacts Management!', version: process.env.VERSION});
 });
 
-export default router;
+// export default router;
