@@ -42,7 +42,7 @@ app.use(protect.express.xss({
 }));
 
 // Database connection string
-let dbConnection : any = {
+let dbConnection: any = {
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
   user: process.env.DB_USER,
@@ -65,7 +65,7 @@ app.use((req, res, next) => {
         });
       }
     },
-    debug: process.env.SQL_DEBUG || true,
+    debug: true,
     acquireConnectionTimeout: 5000
   });
 
