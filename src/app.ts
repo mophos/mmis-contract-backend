@@ -42,7 +42,7 @@ app.use(protect.express.xss({
 }));
 
 // Database connection string
-let dbConnection: MySqlConnectionConfig = {
+let dbConnection : any = {
   host: process.env.DB_HOST,
   port: +process.env.DB_PORT,
   user: process.env.DB_USER,
