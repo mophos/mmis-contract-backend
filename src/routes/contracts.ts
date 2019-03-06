@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
   let db: any = req.db;
   let items: any = req.body.items;
   let contract: any = req.body.contract;
-
+  const warehouseId = req.decoded.warehouseId;
   if (items.length && contract) {
     try {
       // generate contract id
@@ -20,7 +20,14 @@ router.post('/', async (req, res, next) => {
 
       let _contract: any = {};
       _contract.contract_id = contractId;
-      _contract.prepare_no = await serialModel.getSerial(db, 'CM');
+      // serial new
+      let year = moment(contract.startDate, 'YYYY-MM-DD').get('year');
+      const month = moment(contract.startDate, 'YYYY-MM-DD').get('month') + 1;
+      if (month >= 10) {
+        year += 1;
+      }
+      _contract.prepare_no = await serialModel.getSerial(db, 'CM', year, warehouseId);
+      //
       _contract.create_date = moment().format('YYYY-MM-DD');
       _contract.start_date = contract.startDate;
       _contract.end_date = contract.endDate;
